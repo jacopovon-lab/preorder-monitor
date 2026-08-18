@@ -1,0 +1,940 @@
+{
+  "sales": {},
+  "sites": {
+    "Amazing Toys": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "/Pokemon-TCG-Mega-Forces-ex-Mega-Darkrai-EX-Tin": {
+          "compare_at": null,
+          "price": null,
+          "title": "Pokémon TCG: Mega Forces ex Mega Darkrai EX Tin",
+          "url": "https://amazingtoys.ch/Pokemon-TCG-Mega-Forces-ex-Mega-Darkrai-EX-Tin"
+        },
+        "/Pokemon-TCG-Mega-Forces-ex-Mega-Dragonite-EX-Tin": {
+          "compare_at": null,
+          "price": null,
+          "title": "Pokémon TCG: Mega Forces ex Mega Dragonite EX Tin",
+          "url": "https://amazingtoys.ch/Pokemon-TCG-Mega-Forces-ex-Mega-Dragonite-EX-Tin"
+        },
+        "/Pokemon-TCG-Mega-Forces-ex-Mega-Zeraora-EX-Tin": {
+          "compare_at": null,
+          "price": null,
+          "title": "Pokémon TCG: Mega Forces ex Mega Zeraora EX Tin",
+          "url": "https://amazingtoys.ch/Pokemon-TCG-Mega-Forces-ex-Mega-Zeraora-EX-Tin"
+        },
+        "/Yu-Gi-Oh-Beyond-The-Brave-Booster-Display-24-Packs": {
+          "compare_at": null,
+          "price": null,
+          "title": "Yu-Gi-Oh! Beyond The Brave Booster Display (24 Packs)",
+          "url": "https://amazingtoys.ch/Yu-Gi-Oh-Beyond-The-Brave-Booster-Display-24-Packs"
+        },
+        "/Yu-Gi-Oh-Beyond-the-Brave-Booster-Pack": {
+          "compare_at": null,
+          "price": null,
+          "title": "Yu-Gi-Oh! Beyond the Brave Booster Pack",
+          "url": "https://amazingtoys.ch/Yu-Gi-Oh-Beyond-the-Brave-Booster-Pack"
+        },
+        "/Yu-Gi-Oh-TCG-Magnificent-Monsters": {
+          "compare_at": null,
+          "price": null,
+          "title": "Yu-Gi-Oh! TCG Magnificent Monsters",
+          "url": "https://amazingtoys.ch/Yu-Gi-Oh-TCG-Magnificent-Monsters"
+        }
+      }
+    },
+    "Cardmaniac": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "pokemon-tcg-tin-box-mega-krafte-mega-darkrai-ex": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon TCG – Tin-Box Mega-Kräfte – Mega-Darkrai-ex",
+          "url": "https://cardmaniac.ch/products/pokemon-tcg-tin-box-mega-krafte-mega-darkrai-ex"
+        },
+        "pokemon-tcg-tin-box-mega-krafte-mega-dragoran-ex": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon TCG – Tin-Box Mega-Kräfte – Mega-Dragoran-ex",
+          "url": "https://cardmaniac.ch/products/pokemon-tcg-tin-box-mega-krafte-mega-dragoran-ex"
+        },
+        "pokemon-tcg-tin-box-mega-krafte-mega-zeraora-ex": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon TCG – Tin-Box Mega-Kräfte – Mega-Zeraora-ex",
+          "url": "https://cardmaniac.ch/products/pokemon-tcg-tin-box-mega-krafte-mega-zeraora-ex"
+        }
+      }
+    },
+    "Lascho Cards": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "pokemon-tcg-30th-celebration-2-pack-blister": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration 2-Pack Blister",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-2-pack-blister"
+        },
+        "pokemon-tcg-30th-celebration-booster-box-jpn-m6a": {
+          "compare_at": null,
+          "price": 349.0,
+          "title": "Pokémon TCG - 30th Celebration Booster Box JPN m6a",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-booster-box-jpn-m6a"
+        },
+        "pokemon-tcg-30th-celebration-booster-pack": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration Booster Pack (1. Stk)",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-booster-pack"
+        },
+        "pokemon-tcg-30th-celebration-booster-pack-jpn-m6a": {
+          "compare_at": null,
+          "price": 19.9,
+          "title": "Pokémon TCG - 30th Celebration Booster Pack JPN m6a (1 Stk.)",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-booster-pack-jpn-m6a"
+        },
+        "pokemon-tcg-30th-celebration-elite-trainer-box-etb": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration Elite Trainer Box ETB",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-elite-trainer-box-etb"
+        },
+        "pokemon-tcg-30th-celebration-ex-tin": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration ex Tin",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-ex-tin"
+        },
+        "pokemon-tcg-30th-celebration-futuristic-box": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration Futuristic Box",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-futuristic-box"
+        },
+        "pokemon-tcg-30th-celebration-poster-collection": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration Poster Collection",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-poster-collection"
+        },
+        "pokemon-tcg-30th-celebration-tech-sticker-collection": {
+          "compare_at": null,
+          "price": 34.9,
+          "title": "Pokémon TCG - 30th Celebration Tech Sticker Collection",
+          "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-tech-sticker-collection"
+        },
+        "pokemon-tcg-celebration-ex-box": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - 30th Celebration ex Box",
+          "url": "https://laschocards.ch/products/pokemon-tcg-celebration-ex-box"
+        },
+        "pokemon-tcg-espeon-ex-and-umbreon-ex-30th-celebration-premium-deck-set": {
+          "compare_at": null,
+          "price": 459.0,
+          "title": "Pokémon TCG - Espeon ex and Umbreon ex 30th Celebration Premium Deck Set",
+          "url": "https://laschocards.ch/products/pokemon-tcg-espeon-ex-and-umbreon-ex-30th-celebration-premium-deck-set"
+        },
+        "pokemon-tcg-mega-evolution-me06-delta-reign-booster-box-display": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - Mega Evolution ME06: Delta Reign Booster Box Display",
+          "url": "https://laschocards.ch/products/pokemon-tcg-mega-evolution-me06-delta-reign-booster-box-display"
+        },
+        "pokemon-tcg-mega-evolution-me06-delta-reign-booster-pack": {
+          "compare_at": null,
+          "price": 8.5,
+          "title": "Pokémon TCG - Mega Evolution ME06: Delta Reign Booster Pack",
+          "url": "https://laschocards.ch/products/pokemon-tcg-mega-evolution-me06-delta-reign-booster-pack"
+        },
+        "pokemon-tcg-mega-evolution-me06-delta-reign-etb-elite-trainer-box": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon TCG - Mega Evolution ME06: Delta Reign ETB Elite Trainer Box",
+          "url": "https://laschocards.ch/products/pokemon-tcg-mega-evolution-me06-delta-reign-etb-elite-trainer-box"
+        }
+      }
+    },
+    "Maro Shop (One Piece)": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {}
+    },
+    "Maro Shop (Pokémon)": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {}
+    },
+    "Pikaversum": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "pokemon-tcg-30th-celebration-binder-collection": {
+          "compare_at": null,
+          "price": 54.95,
+          "title": "Pokémon TCG: 30th Celebration Binder Collection",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-30th-celebration-binder-collection"
+        },
+        "pokemon-tcg-30th-celebration-elite-trainer-box": {
+          "compare_at": null,
+          "price": 89.9,
+          "title": "Pokémon TCG: 30th Celebration Elite Trainer Box",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-30th-celebration-elite-trainer-box"
+        },
+        "pokemon-tcg-30th-celebration-pokemon-ex-tin": {
+          "compare_at": null,
+          "price": 36.95,
+          "title": "Pokémon TCG: 30th Celebration Pokémon ex Tin",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-30th-celebration-pokemon-ex-tin"
+        },
+        "pokemon-tcg-30th-celebration-poster-collection": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon TCG: 30th Celebration Poster Collection",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-30th-celebration-poster-collection"
+        },
+        "pokemon-tcg-30th-celebration-sylveon-ex-box-greninja-ex-box": {
+          "compare_at": null,
+          "price": 34.95,
+          "title": "Pokémon TCG: 30th Celebration Sylveon ex Box & Greninja ex Box",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-30th-celebration-sylveon-ex-box-greninja-ex-box"
+        },
+        "pokemon-tcg-mega-forces-tin-2026": {
+          "compare_at": null,
+          "price": 27.9,
+          "title": "Pokémon TCG: Mega Forces Tin 2026",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-mega-forces-tin-2026"
+        },
+        "pokemon-tcg-scarlet-violet-destined-rivals-elite-trainer-box": {
+          "compare_at": null,
+          "price": 79.9,
+          "title": "Pokémon TCG: Scarlet & Violet – Destined Rivals Elite Trainer Box",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-scarlet-violet-destined-rivals-elite-trainer-box"
+        },
+        "pokemon-tcg-scarlet-violet-prismatic-evolutions-super-premium-collection": {
+          "compare_at": null,
+          "price": 189.0,
+          "title": "Pokémon TCG: Scarlet & Violet—Prismatic Evolutions Super-Premium Collection",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-scarlet-violet-prismatic-evolutions-super-premium-collection"
+        },
+        "pokemon-tcg-tin-box-pokeball-2024-en": {
+          "compare_at": null,
+          "price": 19.95,
+          "title": "Pokémon TCG - Tin-Box Pokéball 2024 (EN)",
+          "url": "https://pikaversum.ch/products/pokemon-tcg-tin-box-pokeball-2024-en"
+        },
+        "yu-gi-oh-magnificent-monsters-box": {
+          "compare_at": null,
+          "price": 32.9,
+          "title": "Yu-Gi-Oh! Magnificent Monsters Box",
+          "url": "https://pikaversum.ch/products/yu-gi-oh-magnificent-monsters-box"
+        }
+      }
+    },
+    "Pokecado": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "ascended-heroes-booster-bundle": {
+          "compare_at": null,
+          "price": 84.9,
+          "title": "Pokémon Ascended Heroes Booster Bundle (EN)",
+          "url": "https://www.pokecado.ch/products/ascended-heroes-booster-bundle"
+        },
+        "destined-rivals-booster-box-de-vorbestellung-ab-ca-20-03-2026": {
+          "compare_at": 249.9,
+          "price": 229.9,
+          "title": "Pokémon Destined Rivals Booster Box (DE)",
+          "url": "https://www.pokecado.ch/products/destined-rivals-booster-box-de-vorbestellung-ab-ca-20-03-2026"
+        },
+        "first-partner-illustration-collection-1-de": {
+          "compare_at": null,
+          "price": 26.9,
+          "title": "Pokémon First Partner Illustration Collection #1 (DE)",
+          "url": "https://www.pokecado.ch/products/first-partner-illustration-collection-1-de"
+        },
+        "pokemon-2-pack-blister-chaos-rising-pitch-black": {
+          "compare_at": null,
+          "price": 14.9,
+          "title": "Pokémon 2-Pack Blister | Chaos Rising & Pitch Black (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-2-pack-blister-chaos-rising-pitch-black"
+        },
+        "pokemon-30th-anniversary-2-pack-blister-de": {
+          "compare_at": null,
+          "price": 17.9,
+          "title": "Pokémon 30th Celebration 2-Pack Blister (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-2-pack-blister-de"
+        },
+        "pokemon-30th-anniversary-2-pack-blister-en": {
+          "compare_at": null,
+          "price": 19.9,
+          "title": "Pokémon 30th Celebration 2-Pack Blister (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-2-pack-blister-en"
+        },
+        "pokemon-30th-anniversary-2-pack-blister-fr": {
+          "compare_at": null,
+          "price": 17.9,
+          "title": "Pokémon 30th Celebration 2-Pack Blister (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-2-pack-blister-fr"
+        },
+        "pokemon-30th-anniversary-battle-deck-espeon-ex-de": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Espeon ex (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-espeon-ex-de"
+        },
+        "pokemon-30th-anniversary-battle-deck-espeon-ex-en": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Espeon ex (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-espeon-ex-en"
+        },
+        "pokemon-30th-anniversary-battle-deck-espeon-ex-fr": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Espeon ex (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-espeon-ex-fr"
+        },
+        "pokemon-30th-anniversary-battle-deck-umbreon-ex-de": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Umbreon ex (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-umbreon-ex-de"
+        },
+        "pokemon-30th-anniversary-battle-deck-umbreon-ex-en": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Umbreon ex (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-umbreon-ex-en"
+        },
+        "pokemon-30th-anniversary-battle-deck-umbreon-ex-fr": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Battle Deck – Umbreon ex (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-battle-deck-umbreon-ex-fr"
+        },
+        "pokemon-30th-anniversary-binder-collection-de": {
+          "compare_at": null,
+          "price": 56.9,
+          "title": "Pokémon 30th Celebration Binder Collection (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-binder-collection-de"
+        },
+        "pokemon-30th-anniversary-binder-collection-en": {
+          "compare_at": null,
+          "price": 64.9,
+          "title": "Pokémon 30th Celebration Binder Collection (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-binder-collection-en"
+        },
+        "pokemon-30th-anniversary-ditto-premium-collection-de": {
+          "compare_at": null,
+          "price": 63.9,
+          "title": "Pokémon 30th Celebration Ditto Premium Collection (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ditto-premium-collection-de"
+        },
+        "pokemon-30th-anniversary-ditto-premium-collection-en": {
+          "compare_at": null,
+          "price": 71.9,
+          "title": "Pokémon 30th Celebration Ditto Premium Collection (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ditto-premium-collection-en"
+        },
+        "pokemon-30th-anniversary-ditto-premium-collection-fr": {
+          "compare_at": null,
+          "price": 63.9,
+          "title": "Pokémon 30th Celebration Ditto Premium Collection (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ditto-premium-collection-fr"
+        },
+        "pokemon-30th-anniversary-ex-box-greninja-de": {
+          "compare_at": null,
+          "price": 32.9,
+          "title": "Pokémon 30th Celebration ex Box - Greninja (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-box-greninja-de"
+        },
+        "pokemon-30th-anniversary-ex-box-greninja-en": {
+          "compare_at": null,
+          "price": 36.9,
+          "title": "Pokémon 30th Celebration ex Box - Greninja (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-box-greninja-en"
+        },
+        "pokemon-30th-anniversary-ex-box-sylveon-de": {
+          "compare_at": null,
+          "price": 32.9,
+          "title": "Pokémon 30th Celebration ex Box - Sylveon (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-box-sylveon-de"
+        },
+        "pokemon-30th-anniversary-ex-box-sylveon-en": {
+          "compare_at": null,
+          "price": 36.9,
+          "title": "Pokémon 30th Celebration ex Box - Sylveon (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-box-sylveon-en"
+        },
+        "pokemon-30th-anniversary-ex-tin-greninja-de": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration ex Tin - Greninja (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-greninja-de"
+        },
+        "pokemon-30th-anniversary-ex-tin-greninja-en": {
+          "compare_at": null,
+          "price": 38.9,
+          "title": "Pokémon 30th Celebration ex Tin - Greninja (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-greninja-en"
+        },
+        "pokemon-30th-anniversary-ex-tin-greninja-fr": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration ex Tin - Greninja (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-greninja-fr"
+        },
+        "pokemon-30th-anniversary-ex-tin-sylveon-de": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration ex Tin - Sylveon (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-sylveon-de"
+        },
+        "pokemon-30th-anniversary-ex-tin-sylveon-en": {
+          "compare_at": null,
+          "price": 38.9,
+          "title": "Pokémon 30th Celebration ex Tin - Sylveon (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-sylveon-en"
+        },
+        "pokemon-30th-anniversary-ex-tin-sylveon-fr": {
+          "compare_at": null,
+          "price": 33.9,
+          "title": "Pokémon 30th Celebration ex Tin - Sylveon (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ex-tin-sylveon-fr"
+        },
+        "pokemon-30th-anniversary-figure-collection-mew-de": {
+          "compare_at": null,
+          "price": 44.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mew (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mew-de"
+        },
+        "pokemon-30th-anniversary-figure-collection-mew-en": {
+          "compare_at": null,
+          "price": 50.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mew (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mew-en"
+        },
+        "pokemon-30th-anniversary-figure-collection-mew-fr": {
+          "compare_at": null,
+          "price": 44.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mew (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mew-fr"
+        },
+        "pokemon-30th-anniversary-figure-collection-mewtwo-de": {
+          "compare_at": null,
+          "price": 44.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mewtwo (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mewtwo-de"
+        },
+        "pokemon-30th-anniversary-figure-collection-mewtwo-en": {
+          "compare_at": null,
+          "price": 50.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mewtwo (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mewtwo-en"
+        },
+        "pokemon-30th-anniversary-figure-collection-mewtwo-fr": {
+          "compare_at": null,
+          "price": 44.9,
+          "title": "Pokémon 30th Celebration Figure Collection – Mewtwo (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-figure-collection-mewtwo-fr"
+        },
+        "pokemon-30th-anniversary-mini-tin-de": {
+          "compare_at": null,
+          "price": 16.9,
+          "title": "Pokémon 30th Celebration Mini Tin (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-mini-tin-de"
+        },
+        "pokemon-30th-anniversary-mini-tin-en": {
+          "compare_at": null,
+          "price": 19.9,
+          "title": "Pokémon 30th Celebration Mini Tin (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-mini-tin-en"
+        },
+        "pokemon-30th-anniversary-mini-tin-fr": {
+          "compare_at": null,
+          "price": 16.9,
+          "title": "Pokémon 30th Celebration Mini Tin (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-mini-tin-fr"
+        },
+        "pokemon-30th-anniversary-poster-collection-de": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Poster Collection (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-poster-collection-de"
+        },
+        "pokemon-30th-anniversary-poster-collection-en": {
+          "compare_at": null,
+          "price": 34.9,
+          "title": "Pokémon 30th Celebration Poster Collection (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-poster-collection-en"
+        },
+        "pokemon-30th-anniversary-poster-collection-fr": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Poster Collection (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-poster-collection-fr"
+        },
+        "pokemon-30th-anniversary-tech-sticker-collection-de": {
+          "compare_at": null,
+          "price": 26.9,
+          "title": "Pokémon 30th Celebration Tech Sticker Collection (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-tech-sticker-collection-de"
+        },
+        "pokemon-30th-anniversary-tech-sticker-collection-en": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon 30th Celebration Tech Sticker Collection (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-tech-sticker-collection-en"
+        },
+        "pokemon-30th-anniversary-tech-sticker-collection-fr": {
+          "compare_at": null,
+          "price": 26.9,
+          "title": "Pokémon 30th Celebration Tech Sticker Collection (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-tech-sticker-collection-fr"
+        },
+        "pokemon-30th-anniversary-ultra-premium-collection-espeon-ex-de": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Espeon ex (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ultra-premium-collection-espeon-ex-de"
+        },
+        "pokemon-30th-anniversary-ultra-premium-collection-espeon-ex-fr": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Espeon ex (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ultra-premium-collection-espeon-ex-fr"
+        },
+        "pokemon-30th-anniversary-ultra-premium-collection-umbreon-ex-de": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Umbreon ex (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ultra-premium-collection-umbreon-ex-de"
+        },
+        "pokemon-30th-anniversary-ultra-premium-collection-umbreon-ex-fr": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Umbreon ex (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-anniversary-ultra-premium-collection-umbreon-ex-fr"
+        },
+        "pokemon-30th-celebration-booster-box-jp-japan-import": {
+          "compare_at": null,
+          "price": 324.9,
+          "title": "Pokémon 30th Celebration Booster Box (JP) - Japan Import",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-booster-box-jp-japan-import"
+        },
+        "pokemon-30th-celebration-booster-bundle-de": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Booster Bundle (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-booster-bundle-de"
+        },
+        "pokemon-30th-celebration-booster-bundle-en": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Booster Bundle (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-booster-bundle-en"
+        },
+        "pokemon-30th-celebration-booster-bundle-fr": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Booster Bundle (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-booster-bundle-fr"
+        },
+        "pokemon-30th-celebration-espeon-ex-umbreon-ex-premium-deck-set-jp": {
+          "compare_at": null,
+          "price": 499.9,
+          "title": "Pokémon 30th Celebration Espeon ex & Umbreon ex Premium Deck Set (JP) - Japan Import",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-espeon-ex-umbreon-ex-premium-deck-set-jp"
+        },
+        "pokemon-30th-celebration-ultra-premium-collection-espeon-ex-en": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Espeon ex (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-ultra-premium-collection-espeon-ex-en"
+        },
+        "pokemon-30th-celebration-ultra-premium-collection-umbreon-ex-en": {
+          "compare_at": null,
+          "price": 0.0,
+          "title": "Pokémon 30th Celebration Ultra-Premium Collection – Umbreon ex (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-30th-celebration-ultra-premium-collection-umbreon-ex-en"
+        },
+        "pokemon-ascended-heroes-booster-bundle": {
+          "compare_at": null,
+          "price": 59.9,
+          "title": "Pokémon Ascended Heroes Booster Bundle (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-ascended-heroes-booster-bundle"
+        },
+        "pokemon-ascended-heros-mini-tin": {
+          "compare_at": null,
+          "price": 12.9,
+          "title": "Pokémon Ascended Heroes Mini Tin (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-ascended-heros-mini-tin"
+        },
+        "pokemon-delta-reign-booster-display-de": {
+          "compare_at": null,
+          "price": 209.9,
+          "title": "Pokémon Delta Reign Booster Display (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-booster-display-de"
+        },
+        "pokemon-delta-reign-booster-display-en": {
+          "compare_at": null,
+          "price": 239.9,
+          "title": "Pokémon Delta Reign Booster Display (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-booster-display-en"
+        },
+        "pokemon-delta-reign-booster-display-fr": {
+          "compare_at": null,
+          "price": 209.9,
+          "title": "Pokémon Delta Reign Booster Display (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-booster-display-fr"
+        },
+        "pokemon-delta-reign-elite-trainer-box-de": {
+          "compare_at": null,
+          "price": 69.9,
+          "title": "Pokémon Delta Reign Elite Trainer Box (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-elite-trainer-box-de"
+        },
+        "pokemon-delta-reign-elite-trainer-box-en": {
+          "compare_at": null,
+          "price": 79.9,
+          "title": "Pokémon Delta Reign Elite Trainer Box (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-elite-trainer-box-en"
+        },
+        "pokemon-delta-reign-elite-trainer-box-fr": {
+          "compare_at": null,
+          "price": 69.9,
+          "title": "Pokémon Delta Reign Elite Trainer Box (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-delta-reign-elite-trainer-box-fr"
+        },
+        "pokemon-destined-rivals-elite-trainer-box-en": {
+          "compare_at": 199.9,
+          "price": 169.9,
+          "title": "Pokémon Destined Rivals Elite Trainer Box (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-destined-rivals-elite-trainer-box-en"
+        },
+        "pokemon-entwicklungen-in-paldea-booster-box": {
+          "compare_at": null,
+          "price": 229.9,
+          "title": "Pokémon Entwicklungen in Paldea Booster Box (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-entwicklungen-in-paldea-booster-box"
+        },
+        "pokemon-mega-forces-ex-tin-de": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon Mega Forces ex Tin (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-mega-forces-ex-tin-de"
+        },
+        "pokemon-mega-forces-ex-tin-en": {
+          "compare_at": null,
+          "price": 32.9,
+          "title": "Pokémon Mega Forces ex Tin (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-mega-forces-ex-tin-en"
+        },
+        "pokemon-mega-forces-ex-tin-fr": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon Mega Forces ex Tin (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-mega-forces-ex-tin-fr"
+        },
+        "pokemon-origine-perdue-booster-box": {
+          "compare_at": null,
+          "price": 309.9,
+          "title": "Pokémon Origine Perdue Booster Box (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-origine-perdue-booster-box"
+        },
+        "pokemon-origine-perdue-booster-pack": {
+          "compare_at": null,
+          "price": 7.95,
+          "title": "Pokémon Origine Perdue Booster Pack (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-origine-perdue-booster-pack"
+        },
+        "pokemon-paldea-evolved-booster-pack-fr": {
+          "compare_at": null,
+          "price": 6.95,
+          "title": "Pokémon Paldea Evolved Booster Pack (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-paldea-evolved-booster-pack-fr"
+        },
+        "pokemon-poke-ball-tin-2024-en": {
+          "compare_at": null,
+          "price": 29.9,
+          "title": "Pokémon Poké Ball Tin 2024 (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-poke-ball-tin-2024-en"
+        },
+        "pokemon-storm-emerald-japan-import": {
+          "compare_at": null,
+          "price": 157.9,
+          "title": "Pokémon Storm Emerald (JP) - Japan Import",
+          "url": "https://www.pokecado.ch/products/pokemon-storm-emerald-japan-import"
+        },
+        "pokemon-tcg-destined-rivals-booster-box-english-reprint-vorbestellung": {
+          "compare_at": 441.34,
+          "price": 409.9,
+          "title": "Pokémon Destined Rivals Booster Box (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-tcg-destined-rivals-booster-box-english-reprint-vorbestellung"
+        },
+        "pokemon-tcg-first-partner-illustration-collection-3-de": {
+          "compare_at": null,
+          "price": 28.9,
+          "title": "Pokémon First Partner Illustration Collection #3 (DE)",
+          "url": "https://www.pokecado.ch/products/pokemon-tcg-first-partner-illustration-collection-3-de"
+        },
+        "pokemon-tcg-first-partner-illustration-collection-3-en": {
+          "compare_at": null,
+          "price": 34.9,
+          "title": "Pokémon First Partner Illustration Collection #3 (EN)",
+          "url": "https://www.pokecado.ch/products/pokemon-tcg-first-partner-illustration-collection-3-en"
+        },
+        "pokemon-tcg-first-partner-illustration-collection-3-fr": {
+          "compare_at": null,
+          "price": 28.9,
+          "title": "Pokémon First Partner Illustration Collection #3 (FR)",
+          "url": "https://www.pokecado.ch/products/pokemon-tcg-first-partner-illustration-collection-3-fr"
+        },
+        "pokmon-fusion-strike-booster-box": {
+          "compare_at": null,
+          "price": 429.9,
+          "title": "Pokémon Fusion Strike Booster Box (DE)",
+          "url": "https://www.pokecado.ch/products/pokmon-fusion-strike-booster-box"
+        },
+        "prismatic-evolutions-super-premium-collection-de": {
+          "compare_at": null,
+          "price": 250.0,
+          "title": "Prismatic Evolutions Super Premium Collection (DE)",
+          "url": "https://www.pokecado.ch/products/prismatic-evolutions-super-premium-collection-de"
+        }
+      }
+    },
+    "Pokecard Store": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "pokemon-ascended-heroes-ex-box-en": {
+          "compare_at": null,
+          "price": 79.9,
+          "title": "Preorder Pokémon Ascended Heroes ex Box Bundle (EN)",
+          "url": "https://pokecard.store/products/pokemon-ascended-heroes-ex-box-en"
+        },
+        "pokemon-erhabene-helden-ex-box-bundle-de": {
+          "compare_at": null,
+          "price": 77.9,
+          "title": "Preorder Pokémon Erhabene Helden ex Box Bundle (DE)",
+          "url": "https://pokecard.store/products/pokemon-erhabene-helden-ex-box-bundle-de"
+        },
+        "pokemon-heros-transcendants-ex-box-bundle-fr": {
+          "compare_at": null,
+          "price": 77.9,
+          "title": "Preorder Pokémon Héros Transcendants ex Box Bundle (FR)",
+          "url": "https://pokecard.store/products/pokemon-heros-transcendants-ex-box-bundle-fr"
+        },
+        "pokemon-lumiose-city-mini-tin-display-en": {
+          "compare_at": null,
+          "price": 109.9,
+          "title": "Preorder Pokémon Lumiose City Mini Tin Display (EN)",
+          "url": "https://pokecard.store/products/pokemon-lumiose-city-mini-tin-display-en"
+        },
+        "pokemon-mega-moonlit-ex-tin-bundle-en": {
+          "compare_at": null,
+          "price": 54.9,
+          "title": "Preorder Pokémon Mega Moonlit ex Tin Bundle (EN)",
+          "url": "https://pokecard.store/products/pokemon-mega-moonlit-ex-tin-bundle-en"
+        },
+        "preorder-pokemon-30th-anniversary-johto-card-set-jp-kopie": {
+          "compare_at": null,
+          "price": 109.9,
+          "title": "Preorder Pokémon 30th Anniversary Galar Card Set (JP)",
+          "url": "https://pokecard.store/products/preorder-pokemon-30th-anniversary-johto-card-set-jp-kopie"
+        },
+        "preorder-pokemon-30th-anniversary-kanto-card-set-jp": {
+          "compare_at": null,
+          "price": 119.9,
+          "title": "Preorder Pokémon 30th Anniversary Kanto Card Set (JP)",
+          "url": "https://pokecard.store/products/preorder-pokemon-30th-anniversary-kanto-card-set-jp"
+        },
+        "preorder-pokemon-30th-anniversary-kanto-card-set-jp-1": {
+          "compare_at": null,
+          "price": 109.9,
+          "title": "Preorder Pokémon 30th Anniversary Johto Card Set (JP)",
+          "url": "https://pokecard.store/products/preorder-pokemon-30th-anniversary-kanto-card-set-jp-1"
+        },
+        "preorder-pokemon-30th-celebration-m6a-booster-box-jp": {
+          "compare_at": null,
+          "price": 279.0,
+          "title": "Preorder Pokémon 30th Celebration (m6a) Booster Box (JP)",
+          "url": "https://pokecard.store/products/preorder-pokemon-30th-celebration-m6a-booster-box-jp"
+        },
+        "preorder-pokemon-30th-celebration-premium-deck-set-espeon-umbreon-jp": {
+          "compare_at": null,
+          "price": 439.9,
+          "title": "Preorder Pokémon 30th Celebration Premium Deck Set: Espeon & Umbreon (JP)",
+          "url": "https://pokecard.store/products/preorder-pokemon-30th-celebration-premium-deck-set-espeon-umbreon-jp"
+        },
+        "preorder-pokemon-buio-pesto-booster-box-it": {
+          "compare_at": null,
+          "price": 169.9,
+          "title": "Preorder Pokémon Buio Pesto Booster Box (IT)",
+          "url": "https://pokecard.store/products/preorder-pokemon-buio-pesto-booster-box-it"
+        },
+        "preorder-pokemon-dracaufeu-ex-special-collection-fr": {
+          "compare_at": null,
+          "price": 42.9,
+          "title": "Preorder Pokemon Dracaufeu Ex Special Collection (FR)",
+          "url": "https://pokecard.store/products/preorder-pokemon-dracaufeu-ex-special-collection-fr"
+        }
+      }
+    },
+    "Pokecard Store (One Piece)": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "one-piece-magazine-special-feature-heroines-021": {
+          "compare_at": null,
+          "price": 39.9,
+          "title": "Preorder One Piece Magazine Special Feature: Vol. 21 Heroines",
+          "url": "https://pokecard.store/products/one-piece-magazine-special-feature-heroines-021"
+        },
+        "preorder-one-piece-the-worlds-strongest-warriors-op-17-booster-box-jp": {
+          "compare_at": null,
+          "price": 219.9,
+          "title": "Preorder One Piece The World's Strongest Warriors (OP-17) Booster Box (JP)",
+          "url": "https://pokecard.store/products/preorder-one-piece-the-worlds-strongest-warriors-op-17-booster-box-jp"
+        }
+      }
+    },
+    "Pokestore": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "/product-page/30th-celebration-2-pack-blister": {
+          "compare_at": null,
+          "price": null,
+          "title": "30th Celebration 2-Pack Blister",
+          "url": "https://www.pokestore.ch/product-page/30th-celebration-2-pack-blister"
+        },
+        "/product-page/30th-celebration-elite-trainer-box": {
+          "compare_at": null,
+          "price": null,
+          "title": "\"30th Celebration\" Elite Trainer Box",
+          "url": "https://www.pokestore.ch/product-page/30th-celebration-elite-trainer-box"
+        },
+        "/product-page/30th-celebration-ex-box-greninja-oder-espeon-set": {
+          "compare_at": null,
+          "price": null,
+          "title": "30th Celebration ex Box Greninja ex oder Sylveon ex",
+          "url": "https://www.pokestore.ch/product-page/30th-celebration-ex-box-greninja-oder-espeon-set"
+        },
+        "/product-page/30th-celebration-poster-collection": {
+          "compare_at": null,
+          "price": null,
+          "title": "30th Celebration Poster Collection",
+          "url": "https://www.pokestore.ch/product-page/30th-celebration-poster-collection"
+        },
+        "/product-page/ascended-heroes-mini-tin-fr-me2-5": {
+          "compare_at": null,
+          "price": null,
+          "title": "\"Ascended Heroes\" Mini Tin ( EN ME2.5)",
+          "url": "https://www.pokestore.ch/product-page/ascended-heroes-mini-tin-fr-me2-5"
+        },
+        "/product-page/destined-rivals-elite-trainer-box-en-sv10": {
+          "compare_at": null,
+          "price": null,
+          "title": "\"Destined Rivals\" Elite Trainer Box (EN SV10)",
+          "url": "https://www.pokestore.ch/product-page/destined-rivals-elite-trainer-box-en-sv10"
+        },
+        "/product-page/first-partner-illustration-collection-1-series": {
+          "compare_at": null,
+          "price": null,
+          "title": "First Partner Illustration Collection #1 (Series )",
+          "url": "https://www.pokestore.ch/product-page/first-partner-illustration-collection-1-series"
+        },
+        "/product-page/first-partner-illustration-collection-3-series-3": {
+          "compare_at": null,
+          "price": null,
+          "title": "First Partner Illustration Collection #3 (Series 3)",
+          "url": "https://www.pokestore.ch/product-page/first-partner-illustration-collection-3-series-3"
+        },
+        "/product-page/fusions-strike-booster-box-swsh8-deutsch": {
+          "compare_at": null,
+          "price": null,
+          "title": "\"Fusions Strike\" Booster Box (SWSH8) Deutsch",
+          "url": "https://www.pokestore.ch/product-page/fusions-strike-booster-box-swsh8-deutsch"
+        },
+        "/product-page/prismatic-evolutions-super-premium-collection-en": {
+          "compare_at": null,
+          "price": null,
+          "title": "Prismatic Evolutions Super Premium Collection",
+          "url": "https://www.pokestore.ch/product-page/prismatic-evolutions-super-premium-collection-en"
+        },
+        "/product-page/the-time-of-battle-booster-box-op16-en": {
+          "compare_at": null,
+          "price": null,
+          "title": "One Piece \"The Time of Battle \" Booster Box (OP16) EN",
+          "url": "https://www.pokestore.ch/product-page/the-time-of-battle-booster-box-op16-en"
+        }
+      }
+    },
+    "Skyspell": {
+      "alerted": false,
+      "fail_count": 0,
+      "products": {
+        "ditto-173-metamong-project-korean": {
+          "compare_at": null,
+          "price": 249.9,
+          "title": "Ditto 173 | Metamong Project | Korean",
+          "url": "https://skyspell.ch/products/ditto-173-metamong-project-korean"
+        },
+        "magikarp-40-festa-2026-korean": {
+          "compare_at": null,
+          "price": 114.9,
+          "title": "Magikarp 40 | Festa 2026 | Korean",
+          "url": "https://skyspell.ch/products/magikarp-40-festa-2026-korean"
+        },
+        "nivel-arena-goddess-of-victory-nikke-bt08-box-koreanisch": {
+          "compare_at": null,
+          "price": 49.9,
+          "title": "Nivel Arena Goddess of Victory: NIKKE BT08 Box | Koreanisch",
+          "url": "https://skyspell.ch/products/nivel-arena-goddess-of-victory-nikke-bt08-box-koreanisch"
+        },
+        "nivel-arena-special-booster-sb01-box-koreanisch": {
+          "compare_at": null,
+          "price": 44.9,
+          "title": "Nivel Arena Special Booster SB01 Box | Koreanisch",
+          "url": "https://skyspell.ch/products/nivel-arena-special-booster-sb01-box-koreanisch"
+        },
+        "nivel-arena-stellar-blade-bt07-box-koreanisch": {
+          "compare_at": null,
+          "price": 49.9,
+          "title": "Nivel Arena Stellar Blade BT07 Box | Koreanisch",
+          "url": "https://skyspell.ch/products/nivel-arena-stellar-blade-bt07-box-koreanisch"
+        },
+        "one-piece-magazine-vol-21-japanisch": {
+          "compare_at": null,
+          "price": 27.9,
+          "title": "One Piece Magazine Vol.21 | Japanisch",
+          "url": "https://skyspell.ch/products/one-piece-magazine-vol-21-japanisch"
+        },
+        "one-piece-the-worlds-strongest-warriors-op17-box-japanisch": {
+          "compare_at": null,
+          "price": 199.9,
+          "title": "One Piece The World's Strongest Warriors OP17 Box | Japanisch",
+          "url": "https://skyspell.ch/products/one-piece-the-worlds-strongest-warriors-op17-box-japanisch"
+        },
+        "st29-001-monkey-d-luffy-magazine-vol-21-promo-japanisch": {
+          "compare_at": null,
+          "price": 34.9,
+          "title": "ST29-001 Monkey D. Luffy (Magazine Vol.21 Promo) | Japanisch",
+          "url": "https://skyspell.ch/products/st29-001-monkey-d-luffy-magazine-vol-21-promo-japanisch"
+        },
+        "union-arena-bleach-thousand-year-blood-war-vol-3-ex15bt-box-japanisch": {
+          "compare_at": null,
+          "price": 109.9,
+          "title": "Union Arena BLEACH Thousand-Year Blood War Vol.3 EX15BT Box | Japanisch",
+          "url": "https://skyspell.ch/products/union-arena-bleach-thousand-year-blood-war-vol-3-ex15bt-box-japanisch"
+        }
+      }
+    }
+  },
+  "watch": {}
+}
