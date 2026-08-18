@@ -1,0 +1,71 @@
+# Siti monitorati per NUOVI prodotti nelle sezioni preordini.
+# Aggiungere un sito = aggiungere una voce qui (nessun codice nuovo, salvo adapter mancante).
+#
+# type: shopify -> usa /collections/<x>/products.json (url = pagina collezione)
+# type: html    -> scraping con selettori CSS:
+#                  selector:        card prodotto (o direttamente il link)
+#                  title_selector:  (opzionale) elemento col titolo, dentro la card
+#                  link_selector:   (opzionale) <a> col link, dentro la card
+#                  senza title/link_selector: la card stessa deve essere un <a>
+
+sites:
+  - name: Cardmaniac
+    type: shopify
+    url: https://cardmaniac.ch/collections/pre-order
+
+  - name: Pokecado
+    type: shopify
+    url: https://www.pokecado.ch/collections/vorbestellungen-bei-pokecado
+
+  - name: Pokecard Store (One Piece)
+    type: shopify
+    url: https://pokecard.store/collections/op-vorbestellungen
+
+  - name: Pokecard Store
+    type: shopify
+    url: https://pokecard.store/collections/vorbestellung
+
+  - name: Pikaversum
+    type: shopify
+    url: https://pikaversum.ch/collections/pre-order
+
+  - name: Skyspell
+    type: shopify
+    url: https://skyspell.ch/collections/pre-orders
+
+  - name: Maro Shop (Pokémon)
+    type: shopify
+    url: https://www.maro-shop.ch/collections/pokemon-vorverkauf
+
+  - name: Maro Shop (One Piece)
+    type: shopify
+    url: https://www.maro-shop.ch/collections/one-piece-vorverkauf
+
+  - name: Lascho Cards
+    type: shopify
+    url: https://laschocards.ch/collections/pre-order
+
+  - name: Amazing Toys
+    type: html
+    url: https://amazingtoys.ch/Pre-Order/?immediately-available=1
+    selector: "a.product-name"
+
+  - name: Pokestore
+    type: html
+    url: https://www.pokestore.ch/pre-orders
+    selector: '[data-hook="product-list-grid-item"]'
+    title_selector: '[data-hook="product-item-name"]'
+    link_selector: 'a[href*="/product-page/"]'
+
+# Prodotti specifici da sorvegliare per RESTOCK (notifica quando tornano disponibili).
+# Solo siti Shopify per ora: url = pagina prodotto, variant (opzionale) filtra
+# per nome o ID variante; senza variant, notifica per qualsiasi variante.
+#
+# Esempio:
+# watch:
+#   - name: Tin Mega-Darkrai (EN)
+#     type: shopify
+#     url: https://cardmaniac.ch/products/pokemon-tcg-tin-box-mega-krafte-mega-darkrai-ex
+#     variant: Englisch
+
+watch: []
