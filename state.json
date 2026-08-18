@@ -121,7 +121,7 @@
         },
         "pokemon-tcg-30th-celebration-tech-sticker-collection": {
           "compare_at": null,
-          "price": 34.9,
+          "price": 39.9,
           "title": "Pokémon TCG - 30th Celebration Tech Sticker Collection",
           "url": "https://laschocards.ch/products/pokemon-tcg-30th-celebration-tech-sticker-collection"
         },
@@ -806,74 +806,7 @@
     "Pokestore": {
       "alerted": false,
       "fail_count": 0,
-      "products": {
-        "/product-page/30th-celebration-2-pack-blister": {
-          "compare_at": null,
-          "price": null,
-          "title": "30th Celebration 2-Pack Blister",
-          "url": "https://www.pokestore.ch/product-page/30th-celebration-2-pack-blister"
-        },
-        "/product-page/30th-celebration-elite-trainer-box": {
-          "compare_at": null,
-          "price": null,
-          "title": "\"30th Celebration\" Elite Trainer Box",
-          "url": "https://www.pokestore.ch/product-page/30th-celebration-elite-trainer-box"
-        },
-        "/product-page/30th-celebration-ex-box-greninja-oder-espeon-set": {
-          "compare_at": null,
-          "price": null,
-          "title": "30th Celebration ex Box Greninja ex oder Sylveon ex",
-          "url": "https://www.pokestore.ch/product-page/30th-celebration-ex-box-greninja-oder-espeon-set"
-        },
-        "/product-page/30th-celebration-poster-collection": {
-          "compare_at": null,
-          "price": null,
-          "title": "30th Celebration Poster Collection",
-          "url": "https://www.pokestore.ch/product-page/30th-celebration-poster-collection"
-        },
-        "/product-page/ascended-heroes-mini-tin-fr-me2-5": {
-          "compare_at": null,
-          "price": null,
-          "title": "\"Ascended Heroes\" Mini Tin ( EN ME2.5)",
-          "url": "https://www.pokestore.ch/product-page/ascended-heroes-mini-tin-fr-me2-5"
-        },
-        "/product-page/destined-rivals-elite-trainer-box-en-sv10": {
-          "compare_at": null,
-          "price": null,
-          "title": "\"Destined Rivals\" Elite Trainer Box (EN SV10)",
-          "url": "https://www.pokestore.ch/product-page/destined-rivals-elite-trainer-box-en-sv10"
-        },
-        "/product-page/first-partner-illustration-collection-1-series": {
-          "compare_at": null,
-          "price": null,
-          "title": "First Partner Illustration Collection #1 (Series )",
-          "url": "https://www.pokestore.ch/product-page/first-partner-illustration-collection-1-series"
-        },
-        "/product-page/first-partner-illustration-collection-3-series-3": {
-          "compare_at": null,
-          "price": null,
-          "title": "First Partner Illustration Collection #3 (Series 3)",
-          "url": "https://www.pokestore.ch/product-page/first-partner-illustration-collection-3-series-3"
-        },
-        "/product-page/fusions-strike-booster-box-swsh8-deutsch": {
-          "compare_at": null,
-          "price": null,
-          "title": "\"Fusions Strike\" Booster Box (SWSH8) Deutsch",
-          "url": "https://www.pokestore.ch/product-page/fusions-strike-booster-box-swsh8-deutsch"
-        },
-        "/product-page/prismatic-evolutions-super-premium-collection-en": {
-          "compare_at": null,
-          "price": null,
-          "title": "Prismatic Evolutions Super Premium Collection",
-          "url": "https://www.pokestore.ch/product-page/prismatic-evolutions-super-premium-collection-en"
-        },
-        "/product-page/the-time-of-battle-booster-box-op16-en": {
-          "compare_at": null,
-          "price": null,
-          "title": "One Piece \"The Time of Battle \" Booster Box (OP16) EN",
-          "url": "https://www.pokestore.ch/product-page/the-time-of-battle-booster-box-op16-en"
-        }
-      }
+      "products": {}
     },
     "Skyspell": {
       "alerted": false,
