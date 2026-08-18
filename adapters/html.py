@@ -1,5 +1,6 @@
 """Adapter HTML generico: scraping con selettori CSS definiti in sites.yml."""
 
+import re
 from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
@@ -12,6 +13,7 @@ def fetch_products(session, site):
       selector        card prodotto (o direttamente l'<a> se contiene già titolo+link)
       title_selector  (opzionale) elemento col titolo dentro la card
       link_selector   (opzionale) <a> dentro la card
+      price_selector  (opzionale) elemento col prezzo dentro la card (per sezioni sconti)
 
     La chiave univoca è il path dell'URL prodotto.
     """
@@ -33,6 +35,20 @@ def fetch_products(session, site):
         if not title:
             continue
 
+        price = None
+        price_sel = site.get("price_selector")
+        if price_sel:
+            price_el = card.select_one(price_sel)
+            if price_el:
+                price = _parse_price(price_el.get_text())
+
         key = urlsplit(url).path
-        products[key] = {"title": title, "url": url}
+        products[key] = {"title": title, "url": url, "price": price, "compare_at": None}
     return products
+
+
+def _parse_price(text):
+    """Estrae il primo numero da testi tipo 'CHF 29.90', '29,90 €', "1'299.00"."""
+    cleaned = text.replace("'", "").replace("’", "").replace(",", ".")
+    match = re.search(r"\d+(?:\.\d{1,2})?", cleaned)
+    return float(match.group()) if match else None

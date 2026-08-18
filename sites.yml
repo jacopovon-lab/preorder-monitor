@@ -57,6 +57,19 @@ sites:
     title_selector: '[data-hook="product-item-name"]'
     link_selector: 'a[href*="/product-page/"]'
 
+# Sezioni sorvegliate per SCONTI: notifica quando un prodotto cala di prezzo
+# rispetto al run precedente, o quando compare nella sezione già con prezzo
+# barrato. Stessa sintassi di `sites` (shopify o html); per type: html serve
+# anche price_selector.
+#
+# Esempio:
+# sales:
+#   - name: Pokecado (tutti i Pokémon)
+#     type: shopify
+#     url: https://www.pokecado.ch/collections/pokemon
+
+sales: []
+
 # Prodotti specifici da sorvegliare per RESTOCK (notifica quando tornano disponibili).
 # Solo siti Shopify per ora: url = pagina prodotto, variant (opzionale) filtra
 # per nome o ID variante; senza variant, notifica per qualsiasi variante.

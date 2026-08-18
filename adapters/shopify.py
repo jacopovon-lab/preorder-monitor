@@ -26,9 +26,24 @@ def fetch_products(session, site):
         if not batch:
             break
         for p in batch:
+            price = compare_at = None
+            for v in p["variants"]:
+                try:
+                    vp = float(v["price"])
+                except (TypeError, ValueError):
+                    continue
+                if price is None or vp < price:
+                    price = vp
+                    try:
+                        ca = float(v.get("compare_at_price") or 0)
+                    except (TypeError, ValueError):
+                        ca = 0
+                    compare_at = ca if ca > vp else None
             products[p["handle"]] = {
                 "title": p["title"],
                 "url": f"{base}/products/{p['handle']}",
+                "price": price,
+                "compare_at": compare_at,
             }
         if len(batch) < 250:
             break

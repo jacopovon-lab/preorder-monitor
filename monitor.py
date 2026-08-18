@@ -35,7 +35,7 @@ def load_state():
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, encoding="utf-8") as f:
             return json.load(f)
-    return {"sites": {}, "watch": {}}
+    return {"sites": {}, "watch": {}, "sales": {}}
 
 
 def save_state(state):
@@ -94,6 +94,60 @@ def run_sites(session, sites, state, notifications, warnings):
                 )
             notifications.append("\n".join(lines))
         print(f"[{name}] {len(products)} prodotti, {len(new_keys)} nuovi")
+        entry["products"] = products
+
+
+def format_price(value):
+    return f"{value:.2f}".rstrip("0").rstrip(".")
+
+
+def run_sales(session, sections, state, notifications, warnings):
+    """Sezioni sorvegliate per SCONTI: notifica cali di prezzo rispetto al run
+    precedente e prodotti che compaiono già con prezzo barrato."""
+    for section in sections:
+        name = section["name"]
+        entry = state["sales"].setdefault(name, {})
+        try:
+            fetch = ADAPTERS[section["type"]]
+            products = fetch(session, section)
+        except Exception:
+            print(f"[sconti {name}] fetch fallito:\n{traceback.format_exc()}", file=sys.stderr)
+            check_failure(entry, f"sconti: {name}", "sconti", warnings)
+            continue
+
+        check_recovery(entry, f"sconti: {name}", warnings)
+
+        known = entry.get("products")
+        if known is None:
+            print(f"[sconti {name}] primo avvio, salvo {len(products)} prodotti senza notificare")
+            entry["products"] = products
+            continue
+
+        deals = []
+        for k, p in products.items():
+            if p.get("price") is None:
+                continue
+            old = known.get(k)
+            if old is None:
+                # nuovo nella sezione: segnala solo se già visibilmente scontato
+                if p.get("compare_at"):
+                    deals.append(
+                        f'• <a href="{html.escape(p["url"], quote=True)}">'
+                        f'{html.escape(p["title"])}</a>: '
+                        f'<s>{format_price(p["compare_at"])}</s> → '
+                        f'<b>{format_price(p["price"])} CHF</b>'
+                    )
+            elif old.get("price") is not None and p["price"] < old["price"]:
+                pct = round((old["price"] - p["price"]) / old["price"] * 100)
+                deals.append(
+                    f'• <a href="{html.escape(p["url"], quote=True)}">'
+                    f'{html.escape(p["title"])}</a>: '
+                    f'{format_price(old["price"])} → '
+                    f'<b>{format_price(p["price"])} CHF</b> (−{pct}%)'
+                )
+        if deals:
+            notifications.append(f"💸 <b>Sconti — {html.escape(name)}</b>\n" + "\n".join(deals))
+        print(f"[sconti {name}] {len(products)} prodotti, {len(deals)} sconti")
         entry["products"] = products
 
 
@@ -182,7 +236,9 @@ def main():
     session.headers["User-Agent"] = USER_AGENT
 
     notifications, warnings = [], []
+    state.setdefault("sales", {})
     run_sites(session, config.get("sites") or [], state, notifications, warnings)
+    run_sales(session, config.get("sales") or [], state, notifications, warnings)
     run_watch(session, config.get("watch") or [], state, notifications, warnings)
 
     blocks = notifications + warnings
