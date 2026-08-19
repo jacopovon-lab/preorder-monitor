@@ -316,20 +316,25 @@ def send_telegram(text):
 
 
 def send_all(blocks):
-    """Un messaggio per run; spezzato solo se supera il limite Telegram (4096)."""
-    chunks, current = [], ""
+    """Un messaggio per sito/sezione; un blocco oltre il limite Telegram (4096)
+    viene spezzato per righe, senza tagliare un prodotto a metà."""
+    first = True
     for block in blocks:
-        candidate = f"{current}\n\n{block}" if current else block
-        if len(candidate) > 4000:
-            if current:
+        chunks, current = [], ""
+        for line in block.split("\n"):
+            candidate = f"{current}\n{line}" if current else line
+            if len(candidate) > 4000:
                 chunks.append(current)
-            current = block
-        else:
-            current = candidate
-    if current:
-        chunks.append(current)
-    for chunk in chunks:
-        send_telegram(chunk)
+                current = line
+            else:
+                current = candidate
+        if current:
+            chunks.append(current)
+        for chunk in chunks:
+            if not first:
+                time.sleep(3)  # rate limit Telegram: ~20 messaggi/min per chat
+            send_telegram(chunk)
+            first = False
 
 
 def main():
