@@ -236,6 +236,7 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             entry["variants"] = variants
             continue
 
+        new_products = {}
         if appearance_based:
             restocked = [v for k, v in variants.items() if k not in known]
         else:
@@ -243,6 +244,30 @@ def run_watch_sections(session, sections, state, notifications, warnings):
                 v for k, v in variants.items()
                 if v["available"] and known.get(k, {}).get("available") is False
             ]
+            # prodotto mai visto prima (nessuna variante nota): notifica 🆕;
+            # una variante nuova di un prodotto già noto entra invece in silenzio
+            known_handles = {k.rsplit(":", 1)[0] for k in known}
+            for k, v in variants.items():
+                handle = k.rsplit(":", 1)[0]
+                if handle in known_handles:
+                    continue
+                p = new_products.setdefault(handle, {
+                    "title": v.get("product_title") or v["title"],
+                    "url": v["url"],
+                    "available": False,
+                })
+                p["available"] = p["available"] or v["available"]
+
+        if new_products:
+            lines = [f"🆕 <b>{html.escape(name)}</b>"]
+            for p in new_products.values():
+                suffix = "" if p["available"] else " (esaurito)"
+                lines.append(
+                    f'• <a href="{html.escape(p["url"], quote=True)}">'
+                    f'{html.escape(p["title"])}</a>{suffix}'
+                )
+            notifications.append("\n".join(lines))
+
         if restocked:
             lines = [f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"]
             for v in restocked:
@@ -252,7 +277,10 @@ def run_watch_sections(session, sections, state, notifications, warnings):
                 )
             notifications.append("\n".join(lines))
         avail = sum(1 for v in variants.values() if v["available"])
-        print(f"[restock {name}] {len(variants)} varianti ({avail} disponibili), {len(restocked)} restock")
+        print(
+            f"[restock {name}] {len(variants)} varianti ({avail} disponibili), "
+            f"{len(restocked)} restock, {len(new_products)} nuovi"
+        )
         entry["variants"] = variants
 
 

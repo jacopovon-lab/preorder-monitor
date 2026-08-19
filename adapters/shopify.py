@@ -77,6 +77,7 @@ def fetch_section_variants(session, site):
                     title += f" — {v['title']}"
                 variants[f"{p['handle']}:{v['id']}"] = {
                     "title": title,
+                    "product_title": p["title"],
                     "url": f"{base}/products/{p['handle']}",
                     "available": bool(v["available"]),
                 }
