@@ -253,6 +253,12 @@ def main():
 
     blocks = notifications + warnings
     if blocks:
+        configured = os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID")
+        if not configured and not os.environ.get("DRY_RUN"):
+            # Senza secrets non fallire il run: lo stato non viene salvato,
+            # così le novità restano in coda e partiranno al primo run configurato.
+            print(f"Secrets Telegram mancanti: {len(blocks)} notifiche in coda, stato non salvato")
+            return
         send_all(blocks)
         print(f"Inviate {len(blocks)} notifiche")
     else:
