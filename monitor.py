@@ -74,6 +74,14 @@ def save_state(state):
         f.write("\n")
 
 
+def suspicious_shrink(known, current):
+    """True se la lista si è ridotta di oltre metà rispetto allo stato salvato:
+    quasi sempre una pagina servita male (Wix senza SSR, anti-bot, paginazione
+    interrotta), non una rimozione reale. In quel caso lo stato non va toccato,
+    altrimenti al ripristino tutto ciò che 'ricompare' sembrerebbe nuovo."""
+    return bool(known) and len(current) < 0.5 * len(known)
+
+
 def check_failure(entry, name, kind, warnings):
     """Aggiorna il contatore fallimenti e produce l'avviso al superamento soglia."""
     entry["fail_count"] = entry.get("fail_count", 0) + 1
@@ -106,10 +114,8 @@ def run_sites(session, sites, state, notifications, warnings):
             check_failure(entry, name, "sito", warnings)
             continue  # stato prodotti NON toccato: al ripristino niente falsi nuovi
 
-        if entry.get("products") and not products:
-            # Svuotamento improvviso: quasi sempre pagina non renderizzata o
-            # anti-bot, non una collezione davvero vuota. Non tocco lo stato.
-            check_failure(entry, name, "svuotamento sospetto", warnings)
+        if suspicious_shrink(entry.get("products"), products):
+            check_failure(entry, name, "riduzione sospetta", warnings)
             continue
 
         check_recovery(entry, name, warnings)
@@ -153,8 +159,8 @@ def run_sales(session, sections, state, notifications, warnings):
             check_failure(entry, f"sconti: {name}", "sconti", warnings)
             continue
 
-        if entry.get("products") and not products:
-            check_failure(entry, f"sconti: {name}", "svuotamento sospetto", warnings)
+        if suspicious_shrink(entry.get("products"), products):
+            check_failure(entry, f"sconti: {name}", "riduzione sospetta", warnings)
             continue
 
         check_recovery(entry, f"sconti: {name}", warnings)
@@ -218,8 +224,8 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             check_failure(entry, f"restock: {name}", "restock", warnings)
             continue
 
-        if entry.get("variants") and not variants:
-            check_failure(entry, f"restock: {name}", "svuotamento sospetto", warnings)
+        if suspicious_shrink(entry.get("variants"), variants):
+            check_failure(entry, f"restock: {name}", "riduzione sospetta", warnings)
             continue
 
         check_recovery(entry, f"restock: {name}", warnings)
