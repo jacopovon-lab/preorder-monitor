@@ -8,6 +8,7 @@ import html
 import json
 import os
 import sys
+import time
 import traceback
 
 import requests
@@ -32,6 +33,34 @@ WATCH_ADAPTERS = {"shopify": shopify.fetch_watch}
 WATCH_SECTION_ADAPTERS = {"shopify": shopify.fetch_section_variants}
 
 
+class CachedSession:
+    """Le stesse pagine servono a più liste (es. restock + sconti sulla stessa
+    sezione): ogni URL viene scaricato una sola volta per run."""
+
+    def __init__(self, session):
+        self._session = session
+        self._cache = {}
+
+    def get(self, url, params=None, **kwargs):
+        key = (url, tuple(sorted((params or {}).items())))
+        if key not in self._cache:
+            self._cache[key] = self._session.get(url, params=params, **kwargs)
+        return self._cache[key]
+
+
+def skip_for_interval(entry, config_item, name):
+    """True se la voce ha un `interval` (minuti) e non è ancora scaduto.
+    Serve per sezioni pesanti (molte pagine HTML) da non scaricare ogni 5 min."""
+    interval = config_item.get("interval")
+    if not interval:
+        return False
+    if time.time() - entry.get("last_check", 0) < interval * 60 - 90:
+        print(f"[{name}] salto: prossimo controllo tra al massimo {interval} min")
+        return True
+    entry["last_check"] = time.time()
+    return False
+
+
 def load_state():
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, encoding="utf-8") as f:
@@ -41,7 +70,7 @@ def load_state():
 
 def save_state(state):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f, ensure_ascii=False, indent=2, sort_keys=True)
+        json.dump(state, f, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         f.write("\n")
 
 
@@ -114,6 +143,8 @@ def run_sales(session, sections, state, notifications, warnings):
     for section in sections:
         name = section["name"]
         entry = state["sales"].setdefault(name, {})
+        if skip_for_interval(entry, section, f"sconti {name}"):
+            continue
         try:
             fetch = ADAPTERS[section["type"]]
             products = fetch(session, section)
@@ -168,9 +199,20 @@ def run_watch_sections(session, sections, state, notifications, warnings):
     for section in sections:
         name = section["name"]
         entry = state["watch_sections"].setdefault(name, {})
+        if skip_for_interval(entry, section, f"restock {name}"):
+            continue
+        appearance_based = section["type"] not in WATCH_SECTION_ADAPTERS
         try:
-            fetch = WATCH_SECTION_ADAPTERS[section["type"]]
-            variants = fetch(session, section)
+            if appearance_based:
+                # Siti HTML che elencano solo i disponibili (esauriti nascosti o
+                # filtrati via URL): una comparsa nella lista = disponibile.
+                items = ADAPTERS[section["type"]](session, section)
+                variants = {
+                    k: {"title": p["title"], "url": p["url"], "available": True}
+                    for k, p in items.items()
+                }
+            else:
+                variants = WATCH_SECTION_ADAPTERS[section["type"]](session, section)
         except Exception:
             print(f"[restock {name}] fetch fallito:\n{traceback.format_exc()}", file=sys.stderr)
             check_failure(entry, f"restock: {name}", "restock", warnings)
@@ -188,10 +230,13 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             entry["variants"] = variants
             continue
 
-        restocked = [
-            v for k, v in variants.items()
-            if v["available"] and known.get(k, {}).get("available") is False
-        ]
+        if appearance_based:
+            restocked = [v for k, v in variants.items() if k not in known]
+        else:
+            restocked = [
+                v for k, v in variants.items()
+                if v["available"] and known.get(k, {}).get("available") is False
+            ]
         if restocked:
             lines = [f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"]
             for v in restocked:
@@ -286,8 +331,9 @@ def main():
         config = yaml.safe_load(f)
 
     state = load_state()
-    session = requests.Session()
-    session.headers["User-Agent"] = USER_AGENT
+    plain = requests.Session()
+    plain.headers["User-Agent"] = USER_AGENT
+    session = CachedSession(plain)
 
     notifications, warnings = [], []
     state.setdefault("sales", {})

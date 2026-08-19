@@ -14,10 +14,31 @@ def fetch_products(session, site):
       title_selector  (opzionale) elemento col titolo dentro la card
       link_selector   (opzionale) <a> dentro la card
       price_selector  (opzionale) elemento col prezzo dentro la card (per sezioni sconti)
+      page_param      (opzionale) parametro di paginazione (es. "p", "page"):
+                      scarica le pagine successive finché trova prodotti nuovi
+      max_pages       (opzionale, default 50) tetto di sicurezza alla paginazione
 
     La chiave univoca è il path dell'URL prodotto.
     """
-    resp = session.get(site["url"], timeout=30)
+    products = {}
+    page_param = site.get("page_param")
+    for page in range(1, site.get("max_pages", 50) + 1):
+        url = site["url"]
+        if page_param and page > 1:
+            sep = "&" if "?" in url else "?"
+            url = f"{url}{sep}{page_param}={page}"
+        page_products = _fetch_page(session, site, url)
+        # pagina vuota o già vista (i siti spesso ripetono l'ultima pagina): fine
+        if not page_products or all(k in products for k in page_products):
+            break
+        products.update(page_products)
+        if not page_param:
+            break
+    return products
+
+
+def _fetch_page(session, site, url):
+    resp = session.get(url, timeout=30)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 

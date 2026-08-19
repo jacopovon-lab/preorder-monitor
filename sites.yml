@@ -59,28 +59,142 @@ sites:
 
 # Sezioni sorvegliate per SCONTI: notifica quando un prodotto cala di prezzo
 # rispetto al run precedente, o quando compare nella sezione già con prezzo
-# barrato. Stessa sintassi di `sites` (shopify o html); per type: html serve
-# anche price_selector.
-#
-# Esempio:
-# sales:
-#   - name: Pokecado (tutti i Pokémon)
-#     type: shopify
-#     url: https://www.pokecado.ch/collections/pokemon
+# barrato. Stessa sintassi di `sites`; per type: html serve anche
+# price_selector. `interval: N` (minuti) rallenta le sezioni pesanti.
 
-sales: []
+sales:
+  - name: Cardmaniac Pokémon
+    type: shopify
+    url: https://cardmaniac.ch/collections/pokemon-tcg-karten-kaufen
+  - name: Cardmaniac One Piece
+    type: shopify
+    url: https://cardmaniac.ch/collections/one-piece
+  - name: Pokecado Neuheiten
+    type: shopify
+    url: https://www.pokecado.ch/collections/neuheiten-pokemon-tcg-pokecado
+  - name: Pokecard Store Pokémon
+    type: shopify
+    url: https://pokecard.store/collections/pokemon
+  - name: Pokecard Store One Piece
+    type: shopify
+    url: https://pokecard.store/collections/one-piece-1
+  - name: Pikaversum Pokémon
+    type: shopify
+    url: https://pikaversum.ch/collections/pokemon-trading-card-game
+  - name: Pikaversum One Piece
+    type: shopify
+    url: https://pikaversum.ch/collections/one-piece-card-game
+  - name: Skyspell Pokémon
+    type: shopify
+    url: https://skyspell.ch/collections/pokemon-sammelkartenspiel
+  - name: Skyspell One Piece Box
+    type: shopify
+    url: https://skyspell.ch/collections/one-piece-booster-box
+  - name: Maro Shop Pokémon
+    type: shopify
+    url: https://www.maro-shop.ch/collections/pokemon
+  - name: Maro Shop One Piece
+    type: shopify
+    url: https://www.maro-shop.ch/collections/one-piece
+  - name: Lascho Cards Pokémon EN
+    type: shopify
+    url: https://laschocards.ch/collections/englische-pokemon-karten
+  - name: Lascho Cards Pokémon JP
+    type: shopify
+    url: https://laschocards.ch/collections/japanische-pokemon-karten
+  - name: Amazing Toys Pokémon
+    type: html
+    url: https://amazingtoys.ch/Pokemon/?immediately-available=1
+    selector: ".product-box"
+    title_selector: "a.product-name"
+    link_selector: "a.product-name"
+    price_selector: ".product-price"
+    page_param: p
+    interval: 30        # ~42 pagine HTML: ogni 30 min, non ogni 5
+  - name: Pokestore Pokémon
+    type: html
+    url: https://www.pokestore.ch/pokemon
+    selector: '[data-hook="product-list-grid-item"]'
+    title_selector: '[data-hook="product-item-name"]'
+    link_selector: 'a[href*="/product-page/"]'
+    price_selector: '[data-hook="product-item-price-to-pay"]'
+    page_param: page
+  - name: Pokestore One Piece
+    type: html
+    url: https://www.pokestore.ch/one-piece-tcg
+    selector: '[data-hook="product-list-grid-item"]'
+    title_selector: '[data-hook="product-item-name"]'
+    link_selector: 'a[href*="/product-page/"]'
+    price_selector: '[data-hook="product-item-price-to-pay"]'
+    page_param: page
 
-# Sezioni intere sorvegliate per RESTOCK: notifica quando UNA QUALSIASI variante
-# di un qualsiasi prodotto della sezione passa da esaurita a disponibile
-# (tutte le pagine della collezione). Solo siti Shopify.
-#
-# Esempio:
-# watch_sections:
-#   - name: Pokecado — tutti i Pokémon
-#     type: shopify
-#     url: https://www.pokecado.ch/collections/pokemon
+# Sezioni intere sorvegliate per RESTOCK: notifica quando qualcosa torna
+# disponibile nella sezione (tutte le pagine). Per i siti Shopify la precisione
+# è per variante; per i siti html che mostrano solo i disponibili vale la
+# comparsa nella lista (che copre anche i prodotti nuovi già disponibili).
 
-watch_sections: []
+watch_sections:
+  - name: Cardmaniac Pokémon
+    type: shopify
+    url: https://cardmaniac.ch/collections/pokemon-tcg-karten-kaufen
+  - name: Cardmaniac One Piece
+    type: shopify
+    url: https://cardmaniac.ch/collections/one-piece
+  - name: Pokecado Neuheiten
+    type: shopify
+    url: https://www.pokecado.ch/collections/neuheiten-pokemon-tcg-pokecado
+  - name: Pokecard Store Pokémon
+    type: shopify
+    url: https://pokecard.store/collections/pokemon
+  - name: Pokecard Store One Piece
+    type: shopify
+    url: https://pokecard.store/collections/one-piece-1
+  - name: Pikaversum Pokémon
+    type: shopify
+    url: https://pikaversum.ch/collections/pokemon-trading-card-game
+  - name: Pikaversum One Piece
+    type: shopify
+    url: https://pikaversum.ch/collections/one-piece-card-game
+  - name: Skyspell Pokémon
+    type: shopify
+    url: https://skyspell.ch/collections/pokemon-sammelkartenspiel
+  - name: Skyspell One Piece Box
+    type: shopify
+    url: https://skyspell.ch/collections/one-piece-booster-box
+  - name: Maro Shop Pokémon
+    type: shopify
+    url: https://www.maro-shop.ch/collections/pokemon
+  - name: Maro Shop One Piece
+    type: shopify
+    url: https://www.maro-shop.ch/collections/one-piece
+  - name: Lascho Cards Pokémon EN
+    type: shopify
+    url: https://laschocards.ch/collections/englische-pokemon-karten
+  - name: Lascho Cards Pokémon JP
+    type: shopify
+    url: https://laschocards.ch/collections/japanische-pokemon-karten
+  - name: Amazing Toys Pokémon
+    type: html
+    url: https://amazingtoys.ch/Pokemon/?immediately-available=1
+    selector: ".product-box"
+    title_selector: "a.product-name"
+    link_selector: "a.product-name"
+    page_param: p
+    interval: 30
+  - name: Pokestore Pokémon
+    type: html
+    url: https://www.pokestore.ch/pokemon
+    selector: '[data-hook="product-list-grid-item"]'
+    title_selector: '[data-hook="product-item-name"]'
+    link_selector: 'a[href*="/product-page/"]'
+    page_param: page
+  - name: Pokestore One Piece
+    type: html
+    url: https://www.pokestore.ch/one-piece-tcg
+    selector: '[data-hook="product-list-grid-item"]'
+    title_selector: '[data-hook="product-item-name"]'
+    link_selector: 'a[href*="/product-page/"]'
+    page_param: page
 
 # Prodotti specifici da sorvegliare per RESTOCK (notifica quando tornano disponibili).
 # Solo siti Shopify per ora: url = pagina prodotto, variant (opzionale) filtra
