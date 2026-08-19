@@ -76,6 +76,12 @@ def run_sites(session, sites, state, notifications, warnings):
             check_failure(entry, name, "sito", warnings)
             continue  # stato prodotti NON toccato: al ripristino niente falsi nuovi
 
+        if entry.get("products") and not products:
+            # Svuotamento improvviso: quasi sempre pagina non renderizzata o
+            # anti-bot, non una collezione davvero vuota. Non tocco lo stato.
+            check_failure(entry, name, "svuotamento sospetto", warnings)
+            continue
+
         check_recovery(entry, name, warnings)
 
         if "products" not in entry:  # primo avvio per questo sito: silenzioso
@@ -113,6 +119,10 @@ def run_sales(session, sections, state, notifications, warnings):
         except Exception:
             print(f"[sconti {name}] fetch fallito:\n{traceback.format_exc()}", file=sys.stderr)
             check_failure(entry, f"sconti: {name}", "sconti", warnings)
+            continue
+
+        if entry.get("products") and not products:
+            check_failure(entry, f"sconti: {name}", "svuotamento sospetto", warnings)
             continue
 
         check_recovery(entry, f"sconti: {name}", warnings)
