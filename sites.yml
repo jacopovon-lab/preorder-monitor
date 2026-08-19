@@ -70,6 +70,18 @@ sites:
 
 sales: []
 
+# Sezioni intere sorvegliate per RESTOCK: notifica quando UNA QUALSIASI variante
+# di un qualsiasi prodotto della sezione passa da esaurita a disponibile
+# (tutte le pagine della collezione). Solo siti Shopify.
+#
+# Esempio:
+# watch_sections:
+#   - name: Pokecado — tutti i Pokémon
+#     type: shopify
+#     url: https://www.pokecado.ch/collections/pokemon
+
+watch_sections: []
+
 # Prodotti specifici da sorvegliare per RESTOCK (notifica quando tornano disponibili).
 # Solo siti Shopify per ora: url = pagina prodotto, variant (opzionale) filtra
 # per nome o ID variante; senza variant, notifica per qualsiasi variante.

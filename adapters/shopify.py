@@ -51,6 +51,41 @@ def fetch_products(session, site):
     return products
 
 
+def fetch_section_variants(session, site):
+    """Ritorna {"handle:variant_id": {"title", "url", "available"}} per TUTTI i
+    prodotti di una collezione (tutte le pagine), per il restock a livello di sezione."""
+    parts = urlsplit(site["url"])
+    base = f"{parts.scheme}://{parts.netloc}"
+    collection_path = parts.path.rstrip("/")
+
+    variants = {}
+    page = 1
+    while True:
+        resp = session.get(
+            f"{base}{collection_path}/products.json",
+            params={"limit": 250, "page": page},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        batch = resp.json()["products"]
+        if not batch:
+            break
+        for p in batch:
+            for v in p["variants"]:
+                title = p["title"]
+                if v["title"] != "Default Title":
+                    title += f" — {v['title']}"
+                variants[f"{p['handle']}:{v['id']}"] = {
+                    "title": title,
+                    "url": f"{base}/products/{p['handle']}",
+                    "available": bool(v["available"]),
+                }
+        if len(batch) < 250:
+            break
+        page += 1
+    return variants
+
+
 def fetch_watch(session, item):
     """Ritorna {variant_id: {"title": ..., "available": bool}} per un prodotto.
 

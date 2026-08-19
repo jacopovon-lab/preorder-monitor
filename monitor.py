@@ -29,6 +29,7 @@ FAIL_ALERT_THRESHOLD = 12
 
 ADAPTERS = {"shopify": shopify.fetch_products, "html": html_adapter.fetch_products}
 WATCH_ADAPTERS = {"shopify": shopify.fetch_watch}
+WATCH_SECTION_ADAPTERS = {"shopify": shopify.fetch_section_variants}
 
 
 def load_state():
@@ -161,6 +162,49 @@ def run_sales(session, sections, state, notifications, warnings):
         entry["products"] = products
 
 
+def run_watch_sections(session, sections, state, notifications, warnings):
+    """Sezioni intere sorvegliate per RESTOCK: notifica ogni variante che passa
+    da esaurita a disponibile, su tutti i prodotti della sezione."""
+    for section in sections:
+        name = section["name"]
+        entry = state["watch_sections"].setdefault(name, {})
+        try:
+            fetch = WATCH_SECTION_ADAPTERS[section["type"]]
+            variants = fetch(session, section)
+        except Exception:
+            print(f"[restock {name}] fetch fallito:\n{traceback.format_exc()}", file=sys.stderr)
+            check_failure(entry, f"restock: {name}", "restock", warnings)
+            continue
+
+        if entry.get("variants") and not variants:
+            check_failure(entry, f"restock: {name}", "svuotamento sospetto", warnings)
+            continue
+
+        check_recovery(entry, f"restock: {name}", warnings)
+
+        known = entry.get("variants")
+        if known is None:
+            print(f"[restock {name}] primo avvio, salvo {len(variants)} varianti senza notificare")
+            entry["variants"] = variants
+            continue
+
+        restocked = [
+            v for k, v in variants.items()
+            if v["available"] and known.get(k, {}).get("available") is False
+        ]
+        if restocked:
+            lines = [f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"]
+            for v in restocked:
+                lines.append(
+                    f'• <a href="{html.escape(v["url"], quote=True)}">'
+                    f'{html.escape(v["title"])}</a>'
+                )
+            notifications.append("\n".join(lines))
+        avail = sum(1 for v in variants.values() if v["available"])
+        print(f"[restock {name}] {len(variants)} varianti ({avail} disponibili), {len(restocked)} restock")
+        entry["variants"] = variants
+
+
 def run_watch(session, watch_items, state, notifications, warnings):
     for item in watch_items:
         name = item["name"]
@@ -247,8 +291,10 @@ def main():
 
     notifications, warnings = [], []
     state.setdefault("sales", {})
+    state.setdefault("watch_sections", {})
     run_sites(session, config.get("sites") or [], state, notifications, warnings)
     run_sales(session, config.get("sales") or [], state, notifications, warnings)
+    run_watch_sections(session, config.get("watch_sections") or [], state, notifications, warnings)
     run_watch(session, config.get("watch") or [], state, notifications, warnings)
 
     blocks = notifications + warnings
