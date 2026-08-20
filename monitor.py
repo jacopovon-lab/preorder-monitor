@@ -74,10 +74,14 @@ def save_state(state):
         f.write("\n")
 
 
+DISPLAY_ONLY = ("image", "variants", "variant")  # ripresi freschi a ogni run
+
+
 def slim(items):
-    """Copia di un dict prodotti/varianti senza il campo image: nello stato
-    salvato non serve (la foto si riprende fresca a ogni run) e pesa molto."""
-    return {k: {f: v for f, v in it.items() if f != "image"} for k, it in items.items()}
+    """Copia di un dict prodotti/varianti senza i campi solo-visualizzazione:
+    nello stato salvato non servono e pesano molto."""
+    return {k: {f: v for f, v in it.items() if f not in DISPLAY_ONLY}
+            for k, it in items.items()}
 
 
 def linkify(p):
@@ -97,6 +101,28 @@ def price_line(p):
     if p.get("price") is None:
         return None
     return f'💰 <b>{format_price(p["price"])} CHF</b>'
+
+
+def variant_lines(p, limit=8):
+    """Righe per variante (spesso le lingue), con prezzo e disponibilità."""
+    vlist = p.get("variants") or []
+    out = []
+    for v in vlist[:limit]:
+        line = html.escape(v["title"])
+        if v.get("price") is not None:
+            line += f" — {format_price(v['price'])} CHF"
+        if not v.get("available"):
+            line += " ⛔"
+        out.append("• " + line)
+    if len(vlist) > limit:
+        out.append(f"… e altre {len(vlist) - limit} varianti")
+    return out
+
+
+def product_detail(p):
+    """Dettaglio della card: elenco varianti se presenti, altrimenti prezzo."""
+    lines = variant_lines(p)
+    return "\n".join(lines) if lines else price_line(p)
 
 
 def suspicious_shrink(known, current):
@@ -153,7 +179,7 @@ def run_sites(session, sites, state, notifications, warnings):
         new_keys = [k for k in products if k not in entry["products"]]
         for k in new_keys:
             notify(notifications, f"🆕 <b>NUOVO PREORDINE</b> — {html.escape(name)}",
-                   products[k], price_line(products[k]))
+                   products[k], product_detail(products[k]))
         print(f"[{name}] {len(products)} prodotti, {len(new_keys)} nuovi")
         entry["products"] = slim(products)
 
@@ -198,19 +224,20 @@ def run_sales(session, sections, state, notifications, warnings):
             if p.get("price") is None:
                 continue
             old = known.get(k)
+            lang = f' — {html.escape(p["variant"])}' if p.get("variant") else ""
             if old is None:
                 # nuovo nella sezione: segnala solo se già visibilmente scontato
                 if p.get("compare_at"):
                     deals += 1
                     notify(notifications, header, p,
                            f'<s>{format_price(p["compare_at"])}</s> → '
-                           f'<b>{format_price(p["price"])} CHF</b>')
+                           f'<b>{format_price(p["price"])} CHF</b>{lang}')
             elif old.get("price") is not None and p["price"] < old["price"]:
                 pct = round((old["price"] - p["price"]) / old["price"] * 100)
                 deals += 1
                 notify(notifications, header, p,
                        f'{format_price(old["price"])} → '
-                       f'<b>{format_price(p["price"])} CHF</b> (−{pct}%)')
+                       f'<b>{format_price(p["price"])} CHF</b> (−{pct}%){lang}')
         print(f"[sconti {name}] {len(products)} prodotti, {deals} sconti")
         entry["products"] = slim(products)
 
@@ -298,17 +325,26 @@ def run_watch_sections(session, sections, state, notifications, warnings):
                 p = new_products.setdefault(handle, {
                     "title": v.get("product_title") or v["title"],
                     "url": v["url"], "image": v.get("image"),
-                    "available": False, "price": None,
+                    "available": False, "price": None, "variants": [],
                 })
                 p["available"] = p["available"] or v["available"]
                 if v.get("price") is not None and (p["price"] is None or v["price"] < p["price"]):
                     p["price"] = v["price"]
+                vname = v["title"]
+                prefix = f'{p["title"]} — '
+                if vname.startswith(prefix):
+                    p["variants"].append({
+                        "title": vname[len(prefix):],
+                        "available": v["available"],
+                        "price": v.get("price"),
+                    })
 
             for p in new_products.values():
-                suffix = "" if p["available"] else " ⛔ esaurito"
-                detail = price_line(p)
-                notify(notifications, f"🆕 <b>NUOVO PRODOTTO</b> — {html.escape(name)}", p,
-                       f"{detail}{suffix}" if detail else (suffix.strip() or None))
+                detail = product_detail(p)
+                if not p["available"] and not p["variants"]:
+                    detail = f"{detail} ⛔ esaurito" if detail else "⛔ esaurito"
+                notify(notifications, f"🆕 <b>NUOVO PRODOTTO</b> — {html.escape(name)}",
+                       p, detail)
 
         avail = sum(1 for v in variants.values() if v["available"])
         print(

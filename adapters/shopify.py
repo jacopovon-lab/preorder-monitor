@@ -26,25 +26,39 @@ def fetch_products(session, site):
         if not batch:
             break
         for p in batch:
-            price = compare_at = None
+            price = compare_at = min_variant = None
+            vlist = []
             for v in p["variants"]:
                 try:
                     vp = float(v["price"])
                 except (TypeError, ValueError):
+                    vp = None
+                vlist.append({
+                    "title": v["title"],
+                    "available": bool(v.get("available")),
+                    "price": vp,
+                })
+                if vp is None:
                     continue
                 if price is None or vp < price:
                     price = vp
+                    min_variant = v["title"]
                     try:
                         ca = float(v.get("compare_at_price") or 0)
                     except (TypeError, ValueError):
                         ca = 0
                     compare_at = ca if ca > vp else None
+            # le varianti (spesso lingue: Englisch/Deutsch/...) servono solo se
+            # il prodotto ne ha davvero; "Default Title" = variante unica fittizia
+            multi = len(vlist) > 1 or (vlist and vlist[0]["title"] != "Default Title")
             products[p["handle"]] = {
                 "title": p["title"],
                 "url": f"{base}/products/{p['handle']}",
                 "price": price,
                 "compare_at": compare_at,
                 "image": _product_image(p),
+                "variants": vlist if multi else None,
+                "variant": min_variant if multi else None,
             }
         if len(batch) < 250:
             break
