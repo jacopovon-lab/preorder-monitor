@@ -152,8 +152,8 @@ def run_sites(session, sites, state, notifications, warnings):
 
         new_keys = [k for k in products if k not in entry["products"]]
         for k in new_keys:
-            notify(notifications, f"🆕 <b>{html.escape(name)}</b>", products[k],
-                   price_line(products[k]))
+            notify(notifications, f"🆕 <b>NUOVO PREORDINE</b> — {html.escape(name)}",
+                   products[k], price_line(products[k]))
         print(f"[{name}] {len(products)} prodotti, {len(new_keys)} nuovi")
         entry["products"] = slim(products)
 
@@ -192,7 +192,7 @@ def run_sales(session, sections, state, notifications, warnings):
             entry["products"] = products
             continue
 
-        header = f"💸 <b>Sconto — {html.escape(name)}</b>"
+        header = f"💸 <b>SCONTO</b> — {html.escape(name)}"
         deals = 0
         for k, p in products.items():
             if p.get("price") is None:
@@ -252,7 +252,7 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             entry["variants"] = variants
             continue
 
-        restock_header = f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"
+        restock_header = f"🔄 <b>RESTOCK</b> — {html.escape(name)}"
         new_products, n_restock = {}, 0
         if appearance_based:
             for k, v in variants.items():
@@ -307,7 +307,7 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             for p in new_products.values():
                 suffix = "" if p["available"] else " ⛔ esaurito"
                 detail = price_line(p)
-                notify(notifications, f"🆕 <b>{html.escape(name)}</b>", p,
+                notify(notifications, f"🆕 <b>NUOVO PRODOTTO</b> — {html.escape(name)}", p,
                        f"{detail}{suffix}" if detail else (suffix.strip() or None))
 
         avail = sum(1 for v in variants.values() if v["available"])
@@ -347,7 +347,7 @@ def run_watch(session, watch_items, state, notifications, warnings):
             print(f"[watch {name}] primo avvio, salvo stato senza notificare")
 
         for v in restocked:
-            notify(notifications, "🔄 <b>Di nuovo disponibile</b>", v, price_line(v))
+            notify(notifications, f"🔄 <b>RESTOCK</b> — {html.escape(name)}", v, price_line(v))
         avail = sum(1 for v in variants.values() if v["available"])
         print(f"[watch {name}] {avail}/{len(variants)} varianti disponibili, {len(restocked)} restock")
         entry["variants"] = slim(variants)
