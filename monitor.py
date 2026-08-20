@@ -74,6 +74,31 @@ def save_state(state):
         f.write("\n")
 
 
+def slim(items):
+    """Copia di un dict prodotti/varianti senza il campo image: nello stato
+    salvato non serve (la foto si riprende fresca a ogni run) e pesa molto."""
+    return {k: {f: v for f, v in it.items() if f != "image"} for k, it in items.items()}
+
+
+def linkify(p):
+    return f'<a href="{html.escape(p["url"], quote=True)}">{html.escape(p["title"])}</a>'
+
+
+def notify(notifications, header, p, detail=None):
+    """Accoda una notifica per singolo articolo: intestazione, titolo linkato,
+    riga di dettaglio (prezzo ecc.), foto se disponibile."""
+    lines = [header, linkify(p)]
+    if detail:
+        lines.append(detail)
+    notifications.append({"text": "\n".join(lines), "photo": p.get("image")})
+
+
+def price_line(p):
+    if p.get("price") is None:
+        return None
+    return f'💰 <b>{format_price(p["price"])} CHF</b>'
+
+
 def suspicious_shrink(known, current):
     """True se la lista si è ridotta di oltre metà rispetto allo stato salvato:
     quasi sempre una pagina servita male (Wix senza SSR, anti-bot, paginazione
@@ -126,21 +151,17 @@ def run_sites(session, sites, state, notifications, warnings):
             continue
 
         new_keys = [k for k in products if k not in entry["products"]]
-        if new_keys:
-            lines = [f"🆕 <b>{html.escape(name)}</b>"]
-            for k in new_keys:
-                p = products[k]
-                lines.append(
-                    f'• <a href="{html.escape(p["url"], quote=True)}">'
-                    f'{html.escape(p["title"])}</a>'
-                )
-            notifications.append("\n".join(lines))
+        for k in new_keys:
+            notify(notifications, f"🆕 <b>{html.escape(name)}</b>", products[k],
+                   price_line(products[k]))
         print(f"[{name}] {len(products)} prodotti, {len(new_keys)} nuovi")
-        entry["products"] = products
+        entry["products"] = slim(products)
 
 
 def format_price(value):
-    return f"{value:.2f}".rstrip("0").rstrip(".")
+    if value == int(value):
+        return str(int(value))
+    return f"{value:.2f}"
 
 
 def run_sales(session, sections, state, notifications, warnings):
@@ -171,7 +192,8 @@ def run_sales(session, sections, state, notifications, warnings):
             entry["products"] = products
             continue
 
-        deals = []
+        header = f"💸 <b>Sconto — {html.escape(name)}</b>"
+        deals = 0
         for k, p in products.items():
             if p.get("price") is None:
                 continue
@@ -179,24 +201,18 @@ def run_sales(session, sections, state, notifications, warnings):
             if old is None:
                 # nuovo nella sezione: segnala solo se già visibilmente scontato
                 if p.get("compare_at"):
-                    deals.append(
-                        f'• <a href="{html.escape(p["url"], quote=True)}">'
-                        f'{html.escape(p["title"])}</a>: '
-                        f'<s>{format_price(p["compare_at"])}</s> → '
-                        f'<b>{format_price(p["price"])} CHF</b>'
-                    )
+                    deals += 1
+                    notify(notifications, header, p,
+                           f'<s>{format_price(p["compare_at"])}</s> → '
+                           f'<b>{format_price(p["price"])} CHF</b>')
             elif old.get("price") is not None and p["price"] < old["price"]:
                 pct = round((old["price"] - p["price"]) / old["price"] * 100)
-                deals.append(
-                    f'• <a href="{html.escape(p["url"], quote=True)}">'
-                    f'{html.escape(p["title"])}</a>: '
-                    f'{format_price(old["price"])} → '
-                    f'<b>{format_price(p["price"])} CHF</b> (−{pct}%)'
-                )
-        if deals:
-            notifications.append(f"💸 <b>Sconti — {html.escape(name)}</b>\n" + "\n".join(deals))
-        print(f"[sconti {name}] {len(products)} prodotti, {len(deals)} sconti")
-        entry["products"] = products
+                deals += 1
+                notify(notifications, header, p,
+                       f'{format_price(old["price"])} → '
+                       f'<b>{format_price(p["price"])} CHF</b> (−{pct}%)')
+        print(f"[sconti {name}] {len(products)} prodotti, {deals} sconti")
+        entry["products"] = slim(products)
 
 
 def run_watch_sections(session, sections, state, notifications, warnings):
@@ -236,14 +252,42 @@ def run_watch_sections(session, sections, state, notifications, warnings):
             entry["variants"] = variants
             continue
 
-        new_products = {}
+        restock_header = f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"
+        new_products, n_restock = {}, 0
         if appearance_based:
-            restocked = [v for k, v in variants.items() if k not in known]
+            for k, v in variants.items():
+                if k not in known:
+                    n_restock += 1
+                    item = items[k]
+                    notify(notifications, restock_header, item, price_line(item))
         else:
-            restocked = [
-                v for k, v in variants.items()
-                if v["available"] and known.get(k, {}).get("available") is False
-            ]
+            # restock raggruppati per prodotto: un messaggio con tutte le
+            # varianti tornate disponibili, ciascuna col suo prezzo
+            restocked_products = {}
+            for k, v in variants.items():
+                if not (v["available"] and known.get(k, {}).get("available") is False):
+                    continue
+                n_restock += 1
+                handle = k.rsplit(":", 1)[0]
+                p = restocked_products.setdefault(handle, {
+                    "title": v.get("product_title") or v["title"],
+                    "url": v["url"], "image": v.get("image"), "variants": [],
+                })
+                vname = v["title"]
+                prefix = f'{p["title"]} — '
+                if vname.startswith(prefix):
+                    vname = vname[len(prefix):]
+                elif vname == p["title"]:
+                    vname = None
+                line = f"{format_price(v['price'])} CHF" if v.get("price") is not None else ""
+                if vname:
+                    line = f"{vname} — {line}" if line else vname
+                if line:
+                    p["variants"].append(f"• {html.escape(line)}")
+            for p in restocked_products.values():
+                notify(notifications, restock_header, p,
+                       "\n".join(p["variants"]) or None)
+
             # prodotto mai visto prima (nessuna variante nota): notifica 🆕;
             # una variante nuova di un prodotto già noto entra invece in silenzio
             known_handles = {k.rsplit(":", 1)[0] for k in known}
@@ -253,35 +297,25 @@ def run_watch_sections(session, sections, state, notifications, warnings):
                     continue
                 p = new_products.setdefault(handle, {
                     "title": v.get("product_title") or v["title"],
-                    "url": v["url"],
-                    "available": False,
+                    "url": v["url"], "image": v.get("image"),
+                    "available": False, "price": None,
                 })
                 p["available"] = p["available"] or v["available"]
+                if v.get("price") is not None and (p["price"] is None or v["price"] < p["price"]):
+                    p["price"] = v["price"]
 
-        if new_products:
-            lines = [f"🆕 <b>{html.escape(name)}</b>"]
             for p in new_products.values():
-                suffix = "" if p["available"] else " (esaurito)"
-                lines.append(
-                    f'• <a href="{html.escape(p["url"], quote=True)}">'
-                    f'{html.escape(p["title"])}</a>{suffix}'
-                )
-            notifications.append("\n".join(lines))
+                suffix = "" if p["available"] else " ⛔ esaurito"
+                detail = price_line(p)
+                notify(notifications, f"🆕 <b>{html.escape(name)}</b>", p,
+                       f"{detail}{suffix}" if detail else (suffix.strip() or None))
 
-        if restocked:
-            lines = [f"🔄 <b>Di nuovo disponibile — {html.escape(name)}</b>"]
-            for v in restocked:
-                lines.append(
-                    f'• <a href="{html.escape(v["url"], quote=True)}">'
-                    f'{html.escape(v["title"])}</a>'
-                )
-            notifications.append("\n".join(lines))
         avail = sum(1 for v in variants.values() if v["available"])
         print(
             f"[restock {name}] {len(variants)} varianti ({avail} disponibili), "
-            f"{len(restocked)} restock, {len(new_products)} nuovi"
+            f"{n_restock} restock, {len(new_products)} nuovi"
         )
-        entry["variants"] = variants
+        entry["variants"] = slim(variants)
 
 
 def run_watch(session, watch_items, state, notifications, warnings):
@@ -313,56 +347,61 @@ def run_watch(session, watch_items, state, notifications, warnings):
             print(f"[watch {name}] primo avvio, salvo stato senza notificare")
 
         for v in restocked:
-            notifications.append(
-                f'🔄 <b>Di nuovo disponibile</b>\n'
-                f'• <a href="{html.escape(v["url"], quote=True)}">'
-                f'{html.escape(v["title"])}</a>'
-            )
+            notify(notifications, "🔄 <b>Di nuovo disponibile</b>", v, price_line(v))
         avail = sum(1 for v in variants.values() if v["available"])
         print(f"[watch {name}] {avail}/{len(variants)} varianti disponibili, {len(restocked)} restock")
-        entry["variants"] = variants
+        entry["variants"] = slim(variants)
 
 
-def send_telegram(text):
+def _telegram_post(method, payload):
+    token = os.environ["TELEGRAM_BOT_TOKEN"]
+    for attempt in range(3):
+        resp = requests.post(
+            f"https://api.telegram.org/bot{token}/{method}", json=payload, timeout=60,
+        )
+        if resp.status_code == 429:  # rate limit: Telegram dice quanto aspettare
+            wait = (resp.json().get("parameters") or {}).get("retry_after", 5)
+            print(f"Telegram 429, attendo {wait}s")
+            time.sleep(wait + 1)
+            continue
+        return resp
+    return resp
+
+
+def send_telegram(item):
+    """item: {"text": ..., "photo": url o None}. Con foto usa sendPhoto (la
+    caption regge max 1024 caratteri); se la foto viene rifiutata ripiega sul
+    messaggio di solo testo."""
+    text, photo = item["text"], item.get("photo")
     if os.environ.get("DRY_RUN"):
-        print("--- DRY_RUN, messaggio non inviato ---")
+        print(f"--- DRY_RUN, messaggio non inviato (foto: {photo or 'nessuna'}) ---")
         print(text)
         return
-    token = os.environ["TELEGRAM_BOT_TOKEN"]
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
-    resp = requests.post(
-        f"https://api.telegram.org/bot{token}/sendMessage",
-        json={
-            "chat_id": chat_id,
-            "text": text,
-            "parse_mode": "HTML",
-            "disable_web_page_preview": True,
-        },
-        timeout=30,
-    )
+    if photo and len(text) <= 1024:
+        resp = _telegram_post("sendPhoto", {
+            "chat_id": chat_id, "photo": photo,
+            "caption": text, "parse_mode": "HTML",
+        })
+        if resp.ok:
+            return
+        print(f"sendPhoto rifiutato ({resp.status_code}), invio solo testo", file=sys.stderr)
+    resp = _telegram_post("sendMessage", {
+        "chat_id": chat_id, "text": text[:4000],
+        "parse_mode": "HTML", "disable_web_page_preview": True,
+    })
     resp.raise_for_status()
 
 
-def send_all(blocks):
-    """Un messaggio per sito/sezione; un blocco oltre il limite Telegram (4096)
-    viene spezzato per righe, senza tagliare un prodotto a metà."""
-    first = True
-    for block in blocks:
-        chunks, current = [], ""
-        for line in block.split("\n"):
-            candidate = f"{current}\n{line}" if current else line
-            if len(candidate) > 4000:
-                chunks.append(current)
-                current = line
-            else:
-                current = candidate
-        if current:
-            chunks.append(current)
-        for chunk in chunks:
-            if not first:
-                time.sleep(3)  # rate limit Telegram: ~20 messaggi/min per chat
-            send_telegram(chunk)
-            first = False
+def send_all(items):
+    """Un messaggio per articolo, con pausa per il rate limit di Telegram
+    (~20 messaggi/min per chat)."""
+    for i, item in enumerate(items):
+        if isinstance(item, str):  # gli avvisi ⚠️/✅ sono semplici stringhe
+            item = {"text": item, "photo": None}
+        if i:
+            time.sleep(3)
+        send_telegram(item)
 
 
 def main():

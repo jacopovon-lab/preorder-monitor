@@ -14,6 +14,7 @@ def fetch_products(session, site):
       title_selector  (opzionale) elemento col titolo dentro la card
       link_selector   (opzionale) <a> dentro la card
       price_selector  (opzionale) elemento col prezzo dentro la card (per sezioni sconti)
+      image_selector  (opzionale, default "img") <img> dentro la card per la foto
       page_param      (opzionale) parametro di paginazione (es. "p", "page"):
                       scarica le pagine successive finché trova prodotti nuovi
       max_pages       (opzionale, default 50) tetto di sicurezza alla paginazione
@@ -63,8 +64,19 @@ def _fetch_page(session, site, url):
             if price_el:
                 price = _parse_price(price_el.get_text())
 
+        image = None
+        for img_el in card.select(site.get("image_selector", "img")):
+            src = img_el.get("src") or img_el.get("data-src")
+            # salta placeholder lazy-load (data: URI ecc.)
+            if src and src.startswith(("http://", "https://", "//")):
+                image = urljoin(site["url"], src)
+                break
+
         key = urlsplit(url).path
-        products[key] = {"title": title, "url": url, "price": price, "compare_at": None}
+        products[key] = {
+            "title": title, "url": url,
+            "price": price, "compare_at": None, "image": image,
+        }
     return products
 
 

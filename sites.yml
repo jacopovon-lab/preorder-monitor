@@ -48,7 +48,10 @@ sites:
   - name: Amazing Toys
     type: html
     url: https://amazingtoys.ch/Pre-Order/?immediately-available=1
-    selector: "a.product-name"
+    selector: ".product-box"
+    title_selector: "a.product-name"
+    link_selector: "a.product-name"
+    price_selector: ".product-price"
 
   - name: Pokestore
     type: html
@@ -56,6 +59,7 @@ sites:
     selector: '[data-hook="product-list-grid-item"]'
     title_selector: '[data-hook="product-item-name"]'
     link_selector: 'a[href*="/product-page/"]'
+    price_selector: '[data-hook="product-item-price-to-pay"]'
 
 # Sezioni sorvegliate per SCONTI: notifica quando un prodotto cala di prezzo
 # rispetto al run precedente, o quando compare nella sezione già con prezzo
@@ -179,6 +183,7 @@ watch_sections:
     selector: ".product-box"
     title_selector: "a.product-name"
     link_selector: "a.product-name"
+    price_selector: ".product-price"
     page_param: p
     interval: 30
   - name: Pokestore Pokémon
@@ -187,6 +192,7 @@ watch_sections:
     selector: '[data-hook="product-list-grid-item"]'
     title_selector: '[data-hook="product-item-name"]'
     link_selector: 'a[href*="/product-page/"]'
+    price_selector: '[data-hook="product-item-price-to-pay"]'
     page_param: page
   - name: Pokestore One Piece
     type: html
@@ -194,6 +200,7 @@ watch_sections:
     selector: '[data-hook="product-list-grid-item"]'
     title_selector: '[data-hook="product-item-name"]'
     link_selector: 'a[href*="/product-page/"]'
+    price_selector: '[data-hook="product-item-price-to-pay"]'
     page_param: page
 
 # Prodotti specifici da sorvegliare per RESTOCK (notifica quando tornano disponibili).
